@@ -51,6 +51,7 @@
               <div class="field">수량: ${escapeHtml(todo.amount)}</div>
               <div class="field">상태: ${status}</div>
               <div class="field">마감일: ${escapeHtml(todo.due_date)}</div>
+              <div class="field">생성일: ${escapeHtml(todo.created_at)}</div>
             </li>`;
           })
           .join("");
