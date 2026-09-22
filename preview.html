@@ -6,6 +6,24 @@
 </head>
 <body>
   <h1>test_todos 목록</h1>
+  <style>
+    #todo-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    #todo-list li {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px 16px;
+      width: 200px;
+    }
+    #todo-list li .field {
+      margin-top: 4px;
+    }
+  </style>
   <ul id="todo-list"></ul>
 
   <script>
@@ -43,8 +61,10 @@
           .map((todo) => {
             const status = todo.done ? "완료" : "미완료";
             return `<li>
-              <strong>${escapeHtml(todo.title)}</strong>
-              (수량: ${escapeHtml(todo.amount)}, 상태: ${status}, 마감일: ${escapeHtml(todo.due_date)})
+              <div class="field"><strong>${escapeHtml(todo.title)}</strong></div>
+              <div class="field">수량: ${escapeHtml(todo.amount)}</div>
+              <div class="field">상태: ${status}</div>
+              <div class="field">마감일: ${escapeHtml(todo.due_date)}</div>
             </li>`;
           })
           .join("");
