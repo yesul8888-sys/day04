@@ -12,6 +12,12 @@
     const SUPABASE_URL = "https://uqdwueoeqyhtzjrryrbo.supabase.co/rest/v1/";
     const SUPABASE_ANON_KEY = "sb_publishable_rJS2DRDe18CzICjXB7TsCA_lmgY6JTR";
 
+    function escapeHtml(value) {
+      const div = document.createElement("div");
+      div.textContent = String(value);
+      return div.innerHTML;
+    }
+
     async function loadTodos() {
       const listEl = document.getElementById("todo-list");
       try {
@@ -34,7 +40,13 @@
         }
 
         listEl.innerHTML = todos
-          .map((todo) => `<li>${JSON.stringify(todo)}</li>`)
+          .map((todo) => {
+            const status = todo.done ? "완료" : "미완료";
+            return `<li>
+              <strong>${escapeHtml(todo.title)}</strong>
+              (수량: ${escapeHtml(todo.amount)}, 상태: ${status}, 마감일: ${escapeHtml(todo.due_date)})
+            </li>`;
+          })
           .join("");
       } catch (err) {
         listEl.innerHTML = `<li>불러오기 실패: ${err.message}</li>`;
